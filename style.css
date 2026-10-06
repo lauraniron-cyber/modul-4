@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: pink;
+    color: black;
+}
+
+header {
+    background: deeppink;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.tombol {
+    text-align: center;
+    padding: 15px;
+}
+
+button {
+    padding: 8px 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.profil,
+aside,
+#komentar {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profil {
+    flex: 3;
+}
+
+aside {
+    flex: 1;
+}
+
+.foto {
+    text-align: center;
+}
+
+.foto img {
+    width: 200px;
+    border-radius: 10px;
+}
+
+h2,
+h3 {
+    color: deeppink;
+}
+
+.daftar-artikel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.daftar-artikel article {
+    padding: 15px;
+    background: #fff0f5;
+    border-radius: 8px;
+}
+
+.artikel-hover {
+    background: #eef4fb !important;
+}
+
+#komentar {
+    margin: 20px;
+}
+
+#form-komentar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#form-komentar input,
+#form-komentar textarea {
+    padding: 10px;
+}
+
+.komentar-item {
+    background: #fff0f5;
+    padding: 8px;
+    margin: 8px;
+}
+
+#pesan-error {
+    color: red;
+}
+
+.tersembunyi {
+    display: none;
+}
+
+.dark-mode {
+    background: #222;
+    color: white;
+}
+
+.dark-mode .profil,
+.dark-mode aside,
+.dark-mode #komentar {
+    background: #333;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .daftar-artikel {
+        grid-template-columns: 1fr;
+    }
+}
