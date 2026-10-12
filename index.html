@@ -1,109 +1,286 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Saya</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Pendaftaran Mahasiswa Baru — USD (Jalur Reguler)</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <main class="kertas">
 
-<header>
-    <h1>PROFIL SAYA</h1>
-    <nav>
-        <a href="#data">Data Diri</a>
-        <a href="#hobi">Hobi</a>
-        <a href="#portofolio">Portofolio</a>
-    </nav>
-</header>
+    <!-- ===== Kop formulir ===== -->
+    <header class="kop">
+      <div class="kop-teks">
+        <h1>FORMULIR PENDAFTARAN MAHASISWA BARU<br>UNIVERSITAS SANATA DHARMA YOGYAKARTA</h1>
+        <p>Mrican, Tromol Pos 29 Yogyakarta 55002, Telp. (0274) 513301 Fax. (0274) 562383<br>
+           Homepage: http://www.usd.ac.id, E-mail: humas@usd.ac.id</p>
+      </div>
+      <span class="lencana">JALUR REGULER</span>
+    </header>
 
-<div class="tombol">
-    <button id="btn-tema">Mode Gelap</button>
-    <button id="btn-info">Info Tambahan</button>
-</div>
-
-<main>
-
-<section class="profil">
-
-    <div class="foto">
-        <img src="foto_laurax.jpeg" alt="Foto Laura">
-    </div>
-
-    <section id="data">
-        <h2>Data Diri</h2>
-        <p>
-            <b>Nama:</b> Petronela Laura Niron<br>
-            <b>Program Studi:</b> Informatika<br>
-            <b>Universitas:</b> Universitas Sanata Dharma
-        </p>
+    <section class="petunjuk">
+      <div>
+        <strong>Petunjuk :</strong>
+        <ol>
+          <li>Isilah data di bawah ini dengan jelas dan lengkap dengan menggunakan bolpoin.</li>
+          <li>Berilah tanda silang (X) pada kotak di depan pilihan jawaban.</li>
+        </ol>
+      </div>
+      <div class="no-daftar">
+        <label for="no-daftar">Nomor Pendaftaran (diisi oleh petugas)</label>
+        <input type="text" id="no-daftar" disabled placeholder="—">
+      </div>
     </section>
 
-    <section>
-        <h2>Tentang Saya</h2>
-        <p>
-            Halo, nama saya Laura. Saya mahasiswa Informatika
-            yang berasal dari Flores, Nusa Tenggara Timur.
-        </p>
-    </section>
+    <!-- Ringkasan error (muncul saat submit gagal) -->
+    <div id="ringkasan-error" class="ringkasan-error" role="alert" hidden></div>
 
-    <section id="hobi">
-        <h2>Hobi Saya</h2>
-        <ul>
-            <li>Menyanyi</li>
-            <li>Mendengarkan Musik</li>
-            <li>Menonton kartun</li>
-        </ul>
-    </section>
+    <!-- novalidate: bubble bawaan browser dimatikan, pesan ditampilkan sendiri di DOM -->
+    <form id="form-pendaftaran" novalidate>
 
-    <section id="portofolio">
-        <h2>Portofolio</h2>
+      <!-- ================= A. DATA CALON MAHASISWA ================= -->
+      <h2>A. Data Calon Mahasiswa dan Orangtua/Wali</h2>
 
-        <div class="daftar-artikel"></div>
+      <div class="baris">
+        <label for="nama">1. Nama Lengkap (sesuai dengan STTB/STK)</label>
+        <div class="isian">
+          <input type="text" id="nama" name="nama" placeholder="Nama lengkap"
+                 required minlength="3" maxlength="60"
+                 pattern="[A-Za-z .,'\-]+" autocomplete="name">
+          <span class="pesan-error" id="error-nama"></span>
+        </div>
+      </div>
 
-        <button id="btn-tambah">Tambah Portofolio</button>
-    </section>
+      <fieldset class="baris grup-radio">
+        <legend>2. Jenis Kelamin</legend>
+        <div class="isian">
+          <div class="pilihan">
+            <label><input type="radio" name="jenis_kelamin" value="Perempuan" required> Perempuan</label>
+            <label><input type="radio" name="jenis_kelamin" value="Laki-laki" required> Laki-laki</label>
+          </div>
+          <span class="pesan-error" id="error-jenis_kelamin"></span>
+        </div>
+      </fieldset>
 
-    <section>
-        <h2>Hal yang Saya Sukai</h2>
-        <p>
-            Saya sangat suka warna <b>pink</b> dan juga sangat
-            suka dengan <b>kucing</b>.
-        </p>
-    </section>
+      <fieldset class="baris grup-radio">
+        <legend>3. Status</legend>
+        <div class="isian">
+          <div class="pilihan">
+            <label><input type="radio" name="status" value="Belum Menikah" required> Belum Menikah</label>
+            <label><input type="radio" name="status" value="Menikah" required> Menikah</label>
+            <label><input type="radio" name="status" value="Biarawan/Biarawati" required> Biarawan/Biarawati</label>
+          </div>
+          <span class="pesan-error" id="error-status"></span>
+        </div>
+      </fieldset>
 
-</section>
+      <fieldset class="baris grup-radio">
+        <legend>4. Agama</legend>
+        <div class="isian">
+          <div class="pilihan">
+            <label><input type="radio" name="agama" value="Islam" required> Islam</label>
+            <label><input type="radio" name="agama" value="Katolik" required> Katolik</label>
+            <label><input type="radio" name="agama" value="Kristen" required> Kristen</label>
+            <label><input type="radio" name="agama" value="Budha" required> Budha</label>
+            <label><input type="radio" name="agama" value="Hindu" required> Hindu</label>
+            <label><input type="radio" name="agama" value="Lain-lain" required> Lain-lain</label>
+          </div>
+          <span class="pesan-error" id="error-agama"></span>
+        </div>
+      </fieldset>
 
-<aside>
-    <h2>Informasi Tambahan</h2>
-    <p>Saya mahasiswa Informatika Universitas Sanata Dharma.</p>
-</aside>
+      <fieldset class="baris grup-radio">
+        <legend>5. Kewarganegaraan</legend>
+        <div class="isian">
+          <div class="pilihan">
+            <label><input type="radio" name="kewarganegaraan" value="WNI" required> WNI</label>
+            <label><input type="radio" name="kewarganegaraan" value="WNA" required> WNA</label>
+          </div>
+          <span class="pesan-error" id="error-kewarganegaraan"></span>
+        </div>
+      </fieldset>
 
-</main>
+      <div class="baris">
+        <label for="alamat-surat">6. Alamat Surat <small>(alamat yang mudah dijangkau oleh Pos)</small></label>
+        <div class="isian">
+          <input type="text" id="alamat-surat" name="alamat_surat" placeholder="Jalan, nomor, RT/RW, kelurahan"
+                 required minlength="10" maxlength="150" autocomplete="street-address">
+          <span class="pesan-error" id="error-alamat_surat"></span>
+        </div>
+      </div>
 
-<section id="komentar">
-    <h2>Tinggalkan Komentar</h2>
+      <div class="baris">
+        <label for="alamat-asal">7. Alamat Asal</label>
+        <div class="isian">
+          <input type="text" id="alamat-asal" name="alamat_asal" placeholder="Jalan, nomor, RT/RW, kelurahan"
+                 required minlength="10" maxlength="150">
+          <span class="pesan-error" id="error-alamat_asal"></span>
+        </div>
+      </div>
 
-    <form id="form-komentar">
-        <input id="input-nama" placeholder="Nama Anda">
-        <textarea id="input-pesan" placeholder="Tulis komentar..."></textarea>
-        <button>Kirim</button>
+      <div class="baris">
+        <label for="kabupaten">&nbsp;&nbsp;&nbsp;Kabupaten/Kota</label>
+        <div class="isian">
+          <input type="text" id="kabupaten" name="kabupaten" placeholder="Kabupaten/Kota"
+                 required minlength="3" maxlength="50" pattern="[A-Za-z .'\-]+">
+          <span class="pesan-error" id="error-kabupaten"></span>
+        </div>
+      </div>
+
+      <div class="baris">
+        <label for="propinsi">&nbsp;&nbsp;&nbsp;Propinsi</label>
+        <div class="isian">
+          <input type="text" id="propinsi" name="propinsi" placeholder="Propinsi"
+                 required minlength="3" maxlength="50" pattern="[A-Za-z .'\-]+">
+          <span class="pesan-error" id="error-propinsi"></span>
+        </div>
+      </div>
+
+      <div class="baris">
+        <label for="telp">8. No. Telepon Rumah <small>(opsional)</small></label>
+        <div class="isian">
+          <input type="tel" id="telp" name="telp" placeholder="mis. 0274513301"
+                 maxlength="16" pattern="(\+62|0)[0-9]{6,13}" inputmode="tel">
+          <span class="pesan-error" id="error-telp"></span>
+        </div>
+      </div>
+
+      <div class="baris">
+        <label for="hp">&nbsp;&nbsp;&nbsp;No. HP</label>
+        <div class="isian">
+          <input type="tel" id="hp" name="hp" placeholder="mis. 081234567890"
+                 required maxlength="16" pattern="(\+62|62|0)8[1-9][0-9]{6,10}" inputmode="tel" autocomplete="tel">
+          <span class="pesan-error" id="error-hp"></span>
+        </div>
+      </div>
+
+      <div class="baris">
+        <label for="email">9. Alamat E-mail</label>
+        <div class="isian">
+          <input type="email" id="email" name="email" placeholder="nama@contoh.com"
+                 required maxlength="80" autocomplete="email">
+          <span class="pesan-error" id="error-email"></span>
+        </div>
+      </div>
+
+      <div class="baris">
+        <label for="ortu">10. Nama Orang Tua/Wali</label>
+        <div class="isian">
+          <input type="text" id="ortu" name="ortu" placeholder="Nama orang tua/wali"
+                 required minlength="3" maxlength="60" pattern="[A-Za-z .,'\-]+">
+          <span class="pesan-error" id="error-ortu"></span>
+        </div>
+      </div>
+
+      <fieldset class="baris grup-radio">
+        <legend>&nbsp;&nbsp;&nbsp;Tingkat Pendidikan</legend>
+        <div class="isian">
+          <div class="pilihan">
+            <label><input type="radio" name="pendidikan_ortu" value="Tidak lulus SD" required> Tidak lulus SD</label>
+            <label><input type="radio" name="pendidikan_ortu" value="SD" required> SD</label>
+            <label><input type="radio" name="pendidikan_ortu" value="SLTP" required> SLTP</label>
+            <label><input type="radio" name="pendidikan_ortu" value="SMA" required> SMA</label>
+            <label><input type="radio" name="pendidikan_ortu" value="Diploma" required> Diploma</label>
+            <label><input type="radio" name="pendidikan_ortu" value="Sarjana Muda" required> Sarjana Muda</label>
+            <label><input type="radio" name="pendidikan_ortu" value="Sarjana" required> Sarjana</label>
+            <label><input type="radio" name="pendidikan_ortu" value="Magister" required> Magister</label>
+            <label><input type="radio" name="pendidikan_ortu" value="Doktor" required> Doktor</label>
+          </div>
+          <span class="pesan-error" id="error-pendidikan_ortu"></span>
+        </div>
+      </fieldset>
+
+      <!-- 11. Mahasiswa transfer: field hanya wajib jika kotak dicentang (validasi bersyarat) -->
+      <div class="baris">
+        <span class="label-teks">11. Untuk Mahasiswa Transfer</span>
+        <div class="isian">
+          <label class="cek-transfer">
+            <input type="checkbox" id="transfer" name="transfer"> Saya mendaftar sebagai mahasiswa transfer
+          </label>
+        </div>
+      </div>
+
+      <div id="bagian-transfer" hidden>
+        <div class="baris">
+          <label for="asal-pt">&nbsp;&nbsp;&nbsp;a. Asal Perguruan Tinggi</label>
+          <div class="isian">
+            <input type="text" id="asal-pt" name="asal_pt" placeholder="Nama perguruan tinggi asal"
+                   minlength="3" maxlength="80">
+            <span class="pesan-error" id="error-asal_pt"></span>
+          </div>
+        </div>
+
+        <div class="baris">
+          <label for="asal-prodi">&nbsp;&nbsp;&nbsp;b. Asal Program Studi</label>
+          <div class="isian">
+            <input type="text" id="asal-prodi" name="asal_prodi" placeholder="Program studi asal"
+                   minlength="3" maxlength="60">
+            <span class="pesan-error" id="error-asal_prodi"></span>
+          </div>
+        </div>
+
+        <fieldset class="baris grup-radio">
+          <legend>&nbsp;&nbsp;&nbsp;c. Status</legend>
+          <div class="isian">
+            <div class="pilihan">
+              <label><input type="radio" name="status_transfer" value="Terakreditasi"> Terakreditasi dengan nilai
+                <select id="nilai-akreditasi" name="nilai_akreditasi" aria-label="Nilai akreditasi" disabled>
+                  <option value="">—</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </label>
+              <label><input type="radio" name="status_transfer" value="Belum Terakreditasi"> Belum Terakreditasi</label>
+            </div>
+            <span class="pesan-error" id="error-status_transfer"></span>
+            <span class="pesan-error" id="error-nilai_akreditasi"></span>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ================= B. PROGRAM STUDI ================= -->
+      <h2>B. Program Studi Yang Dipilih</h2>
+      <p class="catatan">Pilihan I wajib diisi. Pilihan II dan III boleh dikosongkan, tetapi tidak boleh sama dengan pilihan lain.</p>
+
+      <div class="tabel-scroll">
+        <table id="tabel-prodi">
+          <thead>
+            <tr>
+              <th>Fakultas</th><th>Program Studi</th><th>Jenjang</th>
+              <th>Pilihan I</th><th>Pilihan II</th><th>Pilihan III</th>
+            </tr>
+          </thead>
+          <tbody><!-- baris dirender oleh script.js --></tbody>
+        </table>
+      </div>
+
+      <div class="pesan-prodi">
+        <span class="pesan-error" id="error-pilihan1"></span>
+        <span class="pesan-error" id="error-pilihan2"></span>
+        <span class="pesan-error" id="error-pilihan3"></span>
+      </div>
+      <div class="kosongkan">
+        <button type="button" data-kosongkan="pilihan2">Kosongkan Pilihan II</button>
+        <button type="button" data-kosongkan="pilihan3">Kosongkan Pilihan III</button>
+      </div>
+
+      <div class="aksi">
+        <button type="submit" class="utama">Daftar</button>
+        <button type="reset">Kosongkan Formulir</button>
+      </div>
     </form>
 
-    <p id="pesan-error"></p>
-    <ul id="daftar-komentar"></ul>
+    <!-- Hasil setelah semua field valid (ditampilkan di DOM, bukan alert) -->
+    <section id="hasil" class="hasil" hidden>
+      <h2>Pendaftaran Berhasil (simulasi)</h2>
+      <p>Semua data sudah valid. Berikut ringkasan data yang Anda isi:</p>
+      <dl id="daftar-hasil"></dl>
+      <button type="button" id="btn-ulang">Isi Formulir Baru</button>
+    </section>
+  </main>
 
-    <button id="btn-hapus-komentar">
-        Hapus Semua Komentar
-    </button>
-</section>
-
-<footer>
-    <p>&copy; 2026 Profil Saya</p>
-</footer>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
